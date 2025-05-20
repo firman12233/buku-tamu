@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="acara" class="form-label">Acara</label>
+                            <label for="acara" class="form-label">Keperluan</label>
                             <input type="text" class="form-control" id="acara" name="acara" required />
                         </div>
 
