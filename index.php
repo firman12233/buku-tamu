@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buku Tamu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
@@ -56,7 +57,7 @@
                         <div class="mb-3">
                             <label for="foto" class="form-label">Foto Diri</label><br />
                             <button type="button" class="btn btn-primary" onclick="document.getElementById('foto').click();">
-                                Buka Kamera
+                                <i class="bi bi-camera me-1"></i> Buka Kamera
                             </button>
                             <input type="file" class="form-control d-none" id="foto" name="foto" accept="image/*" capture="user" required />
                             <small class="text-muted d-block mt-2">Gunakan kamera untuk langsung mengambil foto.</small>
@@ -72,7 +73,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Foto file name alert -->
+    <!-- Alert saat file dipilih -->
     <script>
         document.getElementById('foto').addEventListener('change', function () {
             if (this.files.length > 0) {
@@ -82,7 +83,7 @@
         });
     </script>
 
-    <!-- SweetAlert feedback -->
+    <!-- SweetAlert untuk notifikasi -->
     <?php if (isset($_GET['status'])): ?>
         <script>
             document.addEventListener("DOMContentLoaded", () => {
