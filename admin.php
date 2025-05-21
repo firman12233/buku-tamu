@@ -40,7 +40,6 @@ function formatTanggalIndo($datetime) {
     return "$hariNama, $tgl $bln $tahun $jam";
 }
 
-// Ambil data tamu
 $sql = "SELECT * FROM tamu ORDER BY tanggal DESC";
 $result = $conn->query($sql);
 ?>
@@ -67,6 +66,10 @@ $result = $conn->query($sql);
             margin-right: 1rem;
             user-select: none;
         }
+        .modal-content {
+            border: none;
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
         @media (max-width: 768px) {
             .table-responsive {
                 overflow-x: auto;
@@ -85,7 +88,7 @@ $result = $conn->query($sql);
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Admin Buku Tamu</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin" aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarAdmin">
@@ -152,21 +155,33 @@ $result = $conn->query($sql);
 <!-- Modal Detail -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold" id="detailModalLabel">Detail Tamu</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+    <div class="modal-content" style="background-color: #000; color: #fff; border-radius: 10px;">
+      <div class="modal-header" style="background-color: #6f42c1; border-bottom: none;">
+        <h5 class="modal-title w-100 text-center text-white fw-bold" id="detailModalLabel">TAMU</h5>
+        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
       <div class="modal-body text-center">
-        <img src="" alt="Foto Tamu" id="fotoTamu" class="img-fluid rounded mb-3" style="max-height: 250px; object-fit: cover;">
-        <ul class="list-group text-start">
-            <li class="list-group-item"><strong>Nama Tamu:</strong> <span id="modalNama"></span></li>
-            <li class="list-group-item"><strong>Alamat:</strong> <span id="modalAlamat"></span></li>
-            <li class="list-group-item"><strong>Nomer Hp:</strong> <span id="modalNomerHp"></span></li>
-            <li class="list-group-item"><strong>Nama Yang Dituju:</strong> <span id="modalNamaTujuan"></span></li>
-            <li class="list-group-item"><strong>Keperluan:</strong> <span id="modalKeperluan"></span></li>
-            <li class="list-group-item"><strong>Tanggal:</strong> <span id="modalTanggal"></span></li>
-        </ul>
+        <img src="" alt="Foto Tamu" id="fotoTamu" class="img-fluid rounded mb-3" style="max-width: 100%; max-height: 400px;">
+        <h5 id="modalNama" class="mb-3"></h5>
+
+        <div class="mb-2">
+            <div class="fw-bold">Alamat :</div>
+            <div id="modalAlamat"></div>
+        </div>
+
+        <div class="mb-2">
+            <div class="fw-bold">Nomor Kontak :</div>
+            <div id="modalNomerHp"></div>
+        </div>
+
+        <div class="mb-2">
+            <div class="fw-bold">Keperluan :</div>
+            <div id="modalKeperluan"></div>
+        </div>
+
+        <div class="mt-4" style="background-color: #444; padding: 8px; border-radius: 4px;">
+            <span id="modalTanggal" class="text-light small"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -186,7 +201,6 @@ $result = $conn->query($sql);
         document.getElementById('modalNama').textContent = nama;
         document.getElementById('modalAlamat').textContent = alamat;
         document.getElementById('modalNomerHp').textContent = nomerHp;
-        document.getElementById('modalNamaTujuan').textContent = namaTujuan;
         document.getElementById('modalKeperluan').textContent = keperluan;
         document.getElementById('modalTanggal').textContent = tanggal;
         document.getElementById('fotoTamu').src = 'uploads/' + foto;
