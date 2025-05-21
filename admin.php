@@ -110,11 +110,11 @@ $result = $conn->query($sql);
             <table class="table table-bordered table-hover align-middle">
                 <thead class="table-primary">
                     <tr>
-                        <th>#</th>
-                        <th>Tanggal</th>
-                        <th>Nama Tamu</th>
-                        <th>Alamat</th>
-                        <th>Detail</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Nama Tamu</th>
+                        <th class="text-center">Alamat</th>
+                        <th class="text-center">Detail</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -128,11 +128,11 @@ $result = $conn->query($sql);
                         data-tanggal="<?= formatTanggalIndo($row['tanggal']) ?>"
                         data-foto="<?= htmlspecialchars($row['foto']) ?>"
                     >
-                        <td><?= $no++ ?></td>
-                        <td><?= formatTanggalPendek($row['tanggal']) ?></td>
+                        <td class="text-center"><?= $no++ ?></td>
+                        <td class="text-center"><?= formatTanggalPendek($row['tanggal']) ?></td>
                         <td><?= htmlspecialchars($row['nama_tamu']) ?></td>
                         <td><?= htmlspecialchars($row['alamat']) ?></td>
-                        <td>
+                        <td class="text-center">
                             <button class="btn btn-info btn-sm"
                                 data-bs-toggle="modal" data-bs-target="#detailModal"
                                 onclick="setDetail(this.closest('tr'))">
