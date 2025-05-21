@@ -9,7 +9,12 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 include 'koneksi.php';
 
-// Fungsi untuk format tanggal Indonesia
+// Format tanggal: Tabel (pendek)
+function formatTanggalPendek($datetime) {
+    return date('d/m/Y', strtotime($datetime));
+}
+
+// Format tanggal: Detail modal (panjang)
 function formatTanggalIndo($datetime) {
     $bulan = [
         1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
@@ -117,13 +122,14 @@ $result = $conn->query($sql);
                     <tr 
                         data-nama="<?= htmlspecialchars($row['nama_tamu']) ?>"
                         data-alamat="<?= htmlspecialchars($row['alamat']) ?>"
+                        data-nomer_hp="<?= htmlspecialchars($row['nomer_hp']) ?>"
                         data-nama_tujuan="<?= htmlspecialchars($row['nama_tujuan']) ?>"
-                        data-acara="<?= htmlspecialchars($row['acara']) ?>"
+                        data-keperluan="<?= htmlspecialchars($row['keperluan']) ?>"
                         data-tanggal="<?= formatTanggalIndo($row['tanggal']) ?>"
                         data-foto="<?= htmlspecialchars($row['foto']) ?>"
                     >
                         <td><?= $no++ ?></td>
-                        <td><?= formatTanggalIndo($row['tanggal']) ?></td>
+                        <td><?= formatTanggalPendek($row['tanggal']) ?></td>
                         <td><?= htmlspecialchars($row['nama_tamu']) ?></td>
                         <td><?= htmlspecialchars($row['alamat']) ?></td>
                         <td>
@@ -156,8 +162,9 @@ $result = $conn->query($sql);
         <ul class="list-group text-start">
             <li class="list-group-item"><strong>Nama Tamu:</strong> <span id="modalNama"></span></li>
             <li class="list-group-item"><strong>Alamat:</strong> <span id="modalAlamat"></span></li>
+            <li class="list-group-item"><strong>Nomer Hp:</strong> <span id="modalNomerHp"></span></li>
             <li class="list-group-item"><strong>Nama Yang Dituju:</strong> <span id="modalNamaTujuan"></span></li>
-            <li class="list-group-item"><strong>Acara:</strong> <span id="modalAcara"></span></li>
+            <li class="list-group-item"><strong>Keperluan:</strong> <span id="modalKeperluan"></span></li>
             <li class="list-group-item"><strong>Tanggal:</strong> <span id="modalTanggal"></span></li>
         </ul>
       </div>
@@ -170,15 +177,17 @@ $result = $conn->query($sql);
     function setDetail(tr) {
         const nama = tr.getAttribute('data-nama');
         const alamat = tr.getAttribute('data-alamat');
+        const nomerHp = tr.getAttribute('data-nomer_hp');
         const namaTujuan = tr.getAttribute('data-nama_tujuan');
-        const acara = tr.getAttribute('data-acara');
+        const keperluan = tr.getAttribute('data-keperluan');
         const tanggal = tr.getAttribute('data-tanggal');
         const foto = tr.getAttribute('data-foto');
 
         document.getElementById('modalNama').textContent = nama;
         document.getElementById('modalAlamat').textContent = alamat;
+        document.getElementById('modalNomerHp').textContent = nomerHp;
         document.getElementById('modalNamaTujuan').textContent = namaTujuan;
-        document.getElementById('modalAcara').textContent = acara;
+        document.getElementById('modalKeperluan').textContent = keperluan;
         document.getElementById('modalTanggal').textContent = tanggal;
         document.getElementById('fotoTamu').src = 'uploads/' + foto;
         document.getElementById('fotoTamu').alt = 'Foto ' + nama;

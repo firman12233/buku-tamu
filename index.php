@@ -43,13 +43,18 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="nomer_hp" class="form-label">Nomer Hp</label>
+                            <input type="text" class="form-control" id="nomer_hp" name="nomer_hp" required />
+                        </div>
+
+                        <div class="mb-3">
                             <label for="nama_tujuan" class="form-label">Nama Yang Dituju</label>
                             <input type="text" class="form-control" id="nama_tujuan" name="nama_tujuan" required />
                         </div>
 
                         <div class="mb-3">
                             <label for="acara" class="form-label">Keperluan</label>
-                            <input type="text" class="form-control" id="acara" name="acara" required />
+                            <input type="text" class="form-control" id="keperluan" name="keperluan" required />
                         </div>
 
                         <input type="hidden" name="tanggal" value="<?= date('Y-m-d H:i:s') ?>" />
