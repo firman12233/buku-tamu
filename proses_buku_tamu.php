@@ -5,25 +5,28 @@ include 'koneksi.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama_tamu = trim($_POST['nama_tamu']);
     $alamat = trim($_POST['alamat']);
+    $nomer_hp = trim($_POST['nomer_hp']);
     $nama_tujuan = trim($_POST['nama_tujuan']);
-    $acara = trim($_POST['acara']);
+    $keperluan = trim($_POST['keperluan']);
+    $tanggal = date('Y-m-d H:i:s'); // atau pakai $_POST['tanggal'] jika mau ambil dari hidden field
 
-    if (empty($nama_tamu) || empty($alamat) || empty($nama_tujuan) || empty($acara)) {
+    // Validasi form
+    if (empty($nama_tamu) || empty($alamat) || empty($nomer_hp) || empty($nama_tujuan) || empty($keperluan)) {
         header("Location: index.php?status=error&message=" . urlencode("Semua kolom wajib diisi."));
         exit;
     }
 
+    // Validasi file foto
     if (!isset($_FILES['foto']) || $_FILES['foto']['error'] !== UPLOAD_ERR_OK) {
         header("Location: index.php?status=error&message=" . urlencode("Foto wajib diunggah."));
         exit;
     }
 
     $foto = $_FILES['foto'];
-    $foto_size = $foto['size'];
-    $foto_tmp = $foto['tmp_name'];
     $foto_name = $foto['name'];
+    $foto_tmp = $foto['tmp_name'];
+    $foto_size = $foto['size'];
     $foto_ext = strtolower(pathinfo($foto_name, PATHINFO_EXTENSION));
-
     $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
 
     if (!in_array($foto_ext, $allowed_ext)) {
@@ -36,9 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Upload foto
     $upload_dir = 'uploads/';
     if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
-
     $new_filename = uniqid('foto_', true) . '.' . $foto_ext;
     $upload_path = $upload_dir . $new_filename;
 
@@ -47,17 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $datetime = date('Y-m-d H:i:s');
-
-    $stmt = $conn->prepare("INSERT INTO tamu (nama_tamu, alamat, nama_tujuan, acara, tanggal, foto) VALUES (?, ?, ?, ?, ?, ?)");
+    // Simpan ke database
+    $stmt = $conn->prepare("INSERT INTO tamu (nama_tamu, alamat, nomer_hp, nama_tujuan, keperluan, tanggal, foto) VALUES (?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
-        // Kalau prepare gagal
-        if (file_exists($upload_path)) unlink($upload_path);
+        if (file_exists($upload_path)) unlink($upload_path); // hapus foto jika query gagal
         header("Location: index.php?status=error&message=" . urlencode("Gagal menyiapkan query."));
         exit;
     }
-    
-    $stmt->bind_param("ssssss", $nama_tamu, $alamat, $nama_tujuan, $acara, $datetime, $new_filename);
+
+    $stmt->bind_param("sssssss", $nama_tamu, $alamat, $nomer_hp, $nama_tujuan, $keperluan, $tanggal, $new_filename);
 
     if ($stmt->execute()) {
         header("Location: index.php?status=success&message=" . urlencode("Data berhasil disimpan!"));

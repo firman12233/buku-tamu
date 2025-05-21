@@ -192,6 +192,10 @@ $result = $conn->query($sql);
             <div class="fw-bold">Alamat :</div>
             <div id="modalAlamat"></div>
         </div>
+        <div class="mb-2">
+            <div class="fw-bold">Nama Yang Dituju :</div>
+            <div id="modalNamaTujuan"></div>
+        </div>
 
         <div class="mb-2">
             <div class="fw-bold">Nomor Kontak :</div>
@@ -225,6 +229,7 @@ $result = $conn->query($sql);
         document.getElementById('modalNama').textContent = nama;
         document.getElementById('modalAlamat').textContent = alamat;
         document.getElementById('modalNomerHp').textContent = nomerHp;
+        document.getElementById('modalNamaTujuan').textContent = namaTujuan;
         document.getElementById('modalKeperluan').textContent = keperluan;
         document.getElementById('modalTanggal').textContent = tanggal;
         document.getElementById('fotoTamu').src = 'uploads/' + foto;
