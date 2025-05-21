@@ -55,12 +55,12 @@ $result = $conn->query($sql);
         body {
             background-color: #f8f9fa;
         }
-        /* Override warna header tabel jadi biru */
+       
         .table-primary {
             background-color: #0d6efd !important;
             color: white !important;
         }
-        /* Hover baris tabel jadi biru muda */
+    
         .table-hover tbody tr:hover {
             background-color: #cfe2ff !important;
             cursor: pointer;
@@ -88,7 +88,7 @@ $result = $conn->query($sql);
         .btn-close {
             filter: invert(1);
         }
-        /* Kotak tanggal di modal */
+
         .modal-body > div.mt-4 {
             background-color: #e9ecef !important;
             padding: 8px;
