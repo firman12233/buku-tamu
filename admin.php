@@ -55,8 +55,14 @@ $result = $conn->query($sql);
         body {
             background-color: #f8f9fa;
         }
+        /* Override warna header tabel jadi biru */
+        .table-primary {
+            background-color: #0d6efd !important;
+            color: white !important;
+        }
+        /* Hover baris tabel jadi biru muda */
         .table-hover tbody tr:hover {
-            background-color: #e9ecef;
+            background-color: #cfe2ff !important;
             cursor: pointer;
         }
         .navbar-text.admin-greeting {
@@ -67,8 +73,26 @@ $result = $conn->query($sql);
             user-select: none;
         }
         .modal-content {
+            background-color: #fff !important;
+            color: #212529 !important;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
             border: none;
-            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+        .modal-header {
+            background-color: #0d6efd !important;
+            color: white !important;
+            border-bottom: none;
+            position: relative;
+        }
+        .btn-close {
+            filter: invert(1);
+        }
+        /* Kotak tanggal di modal */
+        .modal-body > div.mt-4 {
+            background-color: #e9ecef !important;
+            padding: 8px;
+            border-radius: 4px;
         }
         @media (max-width: 768px) {
             .table-responsive {
@@ -155,10 +179,10 @@ $result = $conn->query($sql);
 <!-- Modal Detail -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="background-color: #000; color: #fff; border-radius: 10px;">
-      <div class="modal-header" style="background-color: #6f42c1; border-bottom: none;">
-        <h5 class="modal-title w-100 text-center text-white fw-bold" id="detailModalLabel">TAMU</h5>
-        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Tutup"></button>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-center fw-bold" id="detailModalLabel">TAMU</h5>
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Tutup"></button>
       </div>
       <div class="modal-body text-center">
         <img src="" alt="Foto Tamu" id="fotoTamu" class="img-fluid rounded mb-3" style="max-width: 100%; max-height: 400px;">
@@ -179,8 +203,8 @@ $result = $conn->query($sql);
             <div id="modalKeperluan"></div>
         </div>
 
-        <div class="mt-4" style="background-color: #444; padding: 8px; border-radius: 4px;">
-            <span id="modalTanggal" class="text-light small"></span>
+        <div class="mt-4">
+            <span id="modalTanggal" class="small"></span>
         </div>
       </div>
     </div>
