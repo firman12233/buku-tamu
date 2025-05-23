@@ -245,11 +245,15 @@ $result = $conn->query($sql);
         document.getElementById('fotoTamu').alt = 'Foto ' + nama;
     }
 
-    document.getElementById('detailModal').addEventListener('shown.bs.modal', () => {
-        setTimeout(() => {
-            const closeButton = document.querySelector('#detailModal .btn-close');
-            if (closeButton) closeButton.focus();
-        }, 100);
+    document.addEventListener('DOMContentLoaded', () => {
+        const detailModal = document.getElementById('detailModal');
+
+        detailModal.addEventListener('shown.bs.modal', function () {
+            const closeButton = detailModal.querySelector('.btn-close');
+            if (closeButton) {
+                closeButton.focus({ preventScroll: true });
+            }
+        });
     });
 </script>
 </body>
