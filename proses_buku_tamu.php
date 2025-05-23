@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         // ✅ Sukses simpan → arahkan ke halaman terima kasih
-        header("Location: terima_kasih.php");
+        header("Location: terima_kasih.html");
         exit;
     } else {
         if (file_exists($upload_path)) unlink($upload_path);
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 } else {
-    // Akses langsung → redirect ke form
+    
     header("Location: index.php");
     exit;
 }
