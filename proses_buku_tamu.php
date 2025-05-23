@@ -72,6 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 } else {
-    header("Location: index.php");
-    exit;
+    header("Location: terima_kasih.php");
+exit;
 }

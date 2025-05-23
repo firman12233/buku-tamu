@@ -150,6 +150,7 @@ $result = $conn->query($sql);
                         data-nama="<?= htmlspecialchars($row['nama_tamu']) ?>"
                         data-alamat="<?= htmlspecialchars($row['alamat']) ?>"
                         data-nomer_hp="<?= htmlspecialchars($row['nomer_hp']) ?>"
+                        data-asal_instansi="<?= htmlspecialchars($row['asal_instansi']) ?>"
                         data-nama_tujuan="<?= htmlspecialchars($row['nama_tujuan']) ?>"
                         data-keperluan="<?= htmlspecialchars($row['keperluan']) ?>"
                         data-tanggal="<?= formatTanggalIndo($row['tanggal']) ?>"
@@ -192,14 +193,20 @@ $result = $conn->query($sql);
             <div class="fw-bold">Alamat :</div>
             <div id="modalAlamat"></div>
         </div>
-        <div class="mb-2">
-            <div class="fw-bold">Nama Yang Dituju :</div>
-            <div id="modalNamaTujuan"></div>
-        </div>
 
         <div class="mb-2">
             <div class="fw-bold">Nomor Kontak :</div>
             <div id="modalNomerHp"></div>
+        </div>
+
+        <div class="mb-2">
+            <div class="fw-bold">Asal Instansi :</div>
+            <div id="modalNomerHp"></div>
+        </div>
+
+        <div class="mb-2">
+            <div class="fw-bold">Nama Yang Dituju :</div>
+            <div id="modalNamaTujuan"></div>
         </div>
 
         <div class="mb-2">
@@ -221,6 +228,7 @@ $result = $conn->query($sql);
         const nama = tr.getAttribute('data-nama');
         const alamat = tr.getAttribute('data-alamat');
         const nomerHp = tr.getAttribute('data-nomer_hp');
+        const asalInstansi = tr.getAttribute('data-asal_instansi');
         const namaTujuan = tr.getAttribute('data-nama_tujuan');
         const keperluan = tr.getAttribute('data-keperluan');
         const tanggal = tr.getAttribute('data-tanggal');
@@ -229,6 +237,7 @@ $result = $conn->query($sql);
         document.getElementById('modalNama').textContent = nama;
         document.getElementById('modalAlamat').textContent = alamat;
         document.getElementById('modalNomerHp').textContent = nomerHp;
+        document.getElementById('modalAsalInstansi').textContent = asal_instansi;
         document.getElementById('modalNamaTujuan').textContent = namaTujuan;
         document.getElementById('modalKeperluan').textContent = keperluan;
         document.getElementById('modalTanggal').textContent = tanggal;
