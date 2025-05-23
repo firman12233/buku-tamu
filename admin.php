@@ -201,7 +201,7 @@ $result = $conn->query($sql);
 
         <div class="mb-2">
             <div class="fw-bold">Asal Instansi :</div>
-            <div id="modalNomerHp"></div>
+            <div id="modalAsalInstansi"></div>
         </div>
 
         <div class="mb-2">
