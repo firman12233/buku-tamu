@@ -245,10 +245,9 @@ $result = $conn->query($sql);
         document.getElementById('fotoTamu').alt = 'Foto ' + nama;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const detailModal = document.getElementById('detailModal');
-
-        detailModal.addEventListener('shown.bs.modal', function () {
+    const detailModal = document.getElementById('detailModal');
+    detailModal.addEventListener('shown.bs.modal', function () {
+        requestAnimationFrame(() => {
             const closeButton = detailModal.querySelector('.btn-close');
             if (closeButton) {
                 closeButton.focus({ preventScroll: true });
