@@ -55,6 +55,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="asal_instansi" class="form-label">Asal Instansi</label>
+                        <input type="text" class="form-control" id="asal_instansi" name="asal_instansi">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="nama_tujuan" class="form-label">Nama Yang Dituju</label>
                         <input type="text" class="form-control" id="nama_tujuan" name="nama_tujuan">
                     </div>
@@ -94,12 +99,13 @@
         const nama = form.nama_tamu.value.trim();
         const alamat = form.alamat.value.trim();
         const hp = form.nomer_hp.value.trim();
+        const asal = form.asal_instansi.value.trim();
         const tujuan = form.nama_tujuan.value.trim();
         const keperluan = form.keperluan.value.trim();
         const fotoInput = form.foto;
         const foto = fotoInput && fotoInput.files && fotoInput.files.length > 0;
 
-        if (!nama || !alamat || !hp || !tujuan || !keperluan || !foto) {
+        if (!nama || !alamat || !hp || !asal || !tujuan || !keperluan || !foto) {
             e.preventDefault();
             Swal.fire({
                 icon: 'warning',
