@@ -32,7 +32,29 @@
     </style>
 </head>
 <body class="bg-light">
-  <div class="container mt-5">
+  <style>
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    input:focus, textarea:focus {
+      border-color: #86b7fe;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+    #preview {
+      display: none;
+      width: 150px;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+  </style>
+
+  <div class="container mt-5 fade-in">
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10">
         <div class="card shadow-lg border-0 rounded-4">
@@ -42,55 +64,58 @@
             </h3>
             <form id="bukuTamuForm" action="proses_buku_tamu.php" method="POST" enctype="multipart/form-data" novalidate>
 
-                    <div class="mb-3">
-                        <label for="nama_tamu" class="form-label">Nama Tamu</label>
-                        <input type="text" class="form-control" id="nama_tamu" name="nama_tamu">
-                    </div>
+              <div class="mb-3">
+                <label for="nama_tamu" class="form-label">Nama Tamu</label>
+                <input type="text" class="form-control" id="nama_tamu" name="nama_tamu" placeholder="Masukkan nama Anda">
+              </div>
 
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat Tamu</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat">
-                    </div>
+              <div class="mb-3">
+                <label for="alamat" class="form-label">Alamat Tamu</label>
+                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat">
+              </div>
 
-                    <div class="mb-3">
-                        <label for="nomer_hp" class="form-label">Nomer HP</label>
-                        <input type="text" class="form-control" id="nomer_hp" name="nomer_hp">
-                    </div>
+              <div class="mb-3">
+                <label for="nomer_hp" class="form-label">Nomor HP</label>
+                <input type="text" class="form-control" id="nomer_hp" name="nomer_hp" placeholder="08xxxxxxxxxx">
+              </div>
 
-                    <div class="mb-3">
-                        <label for="asal_instansi" class="form-label">Asal Instansi</label>
-                        <input type="text" class="form-control" id="asal_instansi" name="asal_instansi">
-                    </div>
+              <div class="mb-3">
+                <label for="asal_instansi" class="form-label">Asal Instansi</label>
+                <input type="text" class="form-control" id="asal_instansi" name="asal_instansi" placeholder="Contoh: SMAN 1 / PT. XYZ">
+              </div>
 
-                    <div class="mb-3">
-                        <label for="nama_tujuan" class="form-label">Nama Yang Dituju</label>
-                        <input type="text" class="form-control" id="nama_tujuan" name="nama_tujuan">
-                    </div>
+              <div class="mb-3">
+                <label for="nama_tujuan" class="form-label">Nama yang Dituju</label>
+                <input type="text" class="form-control" id="nama_tujuan" name="nama_tujuan" placeholder="Contoh: Bapak Andi">
+              </div>
 
-                    <div class="mb-3">
-                        <label for="keperluan" class="form-label">Keperluan</label>
-                        <input type="text" class="form-control" id="keperluan" name="keperluan">
-                    </div>
+              <div class="mb-3">
+                <label for="keperluan" class="form-label">Keperluan</label>
+                <input type="text" class="form-control" id="keperluan" name="keperluan" placeholder="Tulis keperluan Anda">
+              </div>
 
-                    <input type="hidden" name="tanggal" value="<?= date('Y-m-d H:i:s') ?>">
+              <input type="hidden" name="tanggal" value="<?= date('Y-m-d H:i:s') ?>">
 
-                    <div class="mb-3">
-                        <label for="foto" class="form-label">Foto Diri</label><br />
-                        <button type="button" class="btn btn-primary mb-2" onclick="document.getElementById('foto').click();">
-                            <i class="bi bi-camera me-1"></i> Buka Kamera
-                        </button>
-                        <input type="file" class="form-control d-none" id="foto" name="foto" accept="image/*" capture="user">
-                        <img id="preview" src="#" alt="Preview Foto">
-                        <small class="text-muted d-block mt-2">Gunakan kamera untuk langsung mengambil foto.</small>
-                    </div>
+              <div class="mb-3">
+                <label for="foto" class="form-label">Foto Diri</label><br />
+                <button type="button" class="btn btn-outline-primary rounded-pill mb-2" onclick="document.getElementById('foto').click();">
+                  <i class="bi bi-camera me-1"></i> Buka Kamera
+                </button>
+                <input type="file" class="form-control d-none" id="foto" name="foto" accept="image/*" capture="user" onchange="previewFoto(event)">
+                <img id="preview" src="#" alt="Preview Foto">
+                <small class="text-muted d-block mt-2">Gunakan kamera untuk langsung mengambil foto.</small>
+              </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Kirim</button>
-                </form>
-            </div>
+              <button type="submit" class="btn btn-primary rounded-pill w-100 py-2">
+                <i class="bi bi-send me-1"></i> Kirim
+              </button>
+
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
+  </div>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -135,6 +160,20 @@
         }
     });
 </script>
+<script>
+    function previewFoto(event) {
+      const input = event.target;
+      const preview = document.getElementById('preview');
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
 
 <!-- SweetAlert untuk feedback dari server -->
 <?php if (isset($_GET['status'])): ?>
