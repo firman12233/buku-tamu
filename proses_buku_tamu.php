@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $asal_instansi    = trim($_POST['asal_instansi']);
     $nama_tujuan = trim($_POST['nama_tujuan']);
     $keperluan   = trim($_POST['keperluan']);
-    $tanggal     = date('Y-m-d H:i:s'); // bisa juga pakai $_POST['tanggal']
+    $tanggal     = date('Y-m-d H:i:s'); 
 
     // Validasi input
     if (empty($nama_tamu) || empty($alamat) || empty($nomer_hp) || empty($asal_instansi) || empty($nama_tujuan) || empty($keperluan)) {

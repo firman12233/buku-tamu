@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = trim($_POST['password'] ?? '');
 
     $adminUser = 'admin';
-    $adminPass = 'password123';
+    $adminPass = 'akuadmin';
 
     if ($username === $adminUser && $password === $adminPass) {
         $_SESSION['admin_logged_in'] = true;
