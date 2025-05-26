@@ -31,13 +31,16 @@
         }
     </style>
 </head>
-<body>
-<div class="container mt-5">
+<body class="bg-light">
+  <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
-            <div class="card p-4">
-                <h3 class="text-center mb-4">Form Buku Tamu</h3>
-                <form id="bukuTamuForm" action="proses_buku_tamu.php" method="POST" enctype="multipart/form-data" novalidate>
+      <div class="col-lg-8 col-md-10">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-5">
+            <h3 class="text-center mb-4 text-primary">
+              <i class="bi bi-pencil-square me-2"></i>Form Buku Tamu
+            </h3>
+            <form id="bukuTamuForm" action="proses_buku_tamu.php" method="POST" enctype="multipart/form-data" novalidate>
 
                     <div class="mb-3">
                         <label for="nama_tamu" class="form-label">Nama Tamu</label>
