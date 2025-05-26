@@ -51,6 +51,8 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin - Data Buku Tamu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         body {
             background-color: #f8f9fa;
@@ -108,27 +110,32 @@ $result = $conn->query($sql);
         }
     </style>
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Admin Buku Tamu</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarAdmin">
-      <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
-        <li class="nav-item me-2">
-          <span class="navbar-text admin-greeting">
-            Halo, <?= htmlspecialchars($_SESSION['admin_username']); ?>
-          </span>
-        </li>
-        <li class="nav-item">
-          <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
-        </li>
-      </ul>
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <i class="bi bi-journal-text me-2"></i> Admin Buku Tamu
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin" aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarAdmin">
+        <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item me-3">
+            <span class="navbar-text text-white fw-semibold">
+              <i class="bi bi-person-circle me-1"></i>
+              Halo, <?= htmlspecialchars($_SESSION['admin_username']); ?>
+            </span>
+          </li>
+          <li class="nav-item">
+            <a href="logout.php" class="btn btn-danger btn-sm rounded-pill px-3">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 <div class="container my-4">
     <h2 class="mb-4">Data Tamu</h2>
