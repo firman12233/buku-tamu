@@ -16,15 +16,17 @@ if (!isset($_GET['tanggal_awal']) || !isset($_GET['tanggal_akhir'])) {
 $tanggal_awal = $_GET['tanggal_awal'];
 $tanggal_akhir = $_GET['tanggal_akhir'];
 
-// Validasi format tanggal
 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggal_awal) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggal_akhir)) {
     die('Format tanggal tidak valid.');
 }
 
-header("Content-Type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=data_tamu_$tanggal_awal" . "_sampai_$tanggal_akhir.xls");
-header("Pragma: no-cache");
-header("Expires: 0");
+$filename = "data_tamu_" . $tanggal_awal . "_sampai_" . $tanggal_akhir . ".xls";
+
+// Header untuk download file
+header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+header("Content-Disposition: attachment; filename=\"$filename\"");
+header("Cache-Control: max-age=0");
+echo "\xEF\xBB\xBF"; // BOM untuk UTF-8 agar karakter Indonesia tidak rusak
 
 echo "<table border='1'>";
 echo "<tr>
@@ -48,7 +50,7 @@ $no = 1;
 while ($row = $result->fetch_assoc()) {
     echo "<tr>
         <td>{$no}</td>
-        <td>{$row['tanggal']}</td>
+        <td>" . htmlspecialchars($row['tanggal']) . "</td>
         <td>" . htmlspecialchars($row['nama_tamu']) . "</td>
         <td>" . htmlspecialchars($row['alamat']) . "</td>
         <td>" . htmlspecialchars($row['nomer_hp']) . "</td>
@@ -58,6 +60,7 @@ while ($row = $result->fetch_assoc()) {
     </tr>";
     $no++;
 }
+
 echo "</table>";
 
 $stmt->close();
