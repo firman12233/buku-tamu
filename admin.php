@@ -45,6 +45,8 @@ $result = $conn->query($sql);
     <title>Admin - Data Buku Tamu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+
     <style>
         body { background-color: #f8f9fa; }
         .table-primary { background-color: #0d6efd !important; color: white !important; }
@@ -88,7 +90,7 @@ $result = $conn->query($sql);
 
   <?php if ($result && $result->num_rows > 0): ?>
   <div class="table-responsive">
-    <table class="table table-bordered table-hover align-middle">
+    <table id="dataTamu" class="table table-bordered table-hover align-middle">
       <thead class="table-primary">
         <tr class="text-center">
           <th>#</th>
@@ -183,7 +185,11 @@ $result = $conn->query($sql);
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+ 
+    <script>
   function setDetail(tr) {
     document.getElementById('modalNama').textContent = tr.dataset.nama;
     document.getElementById('modalAlamat').textContent = tr.dataset.alamat;
@@ -197,6 +203,15 @@ $result = $conn->query($sql);
 
   document.getElementById('downloadModal').addEventListener('shown.bs.modal', () => {
     document.getElementById('tanggal_awal_modal').focus();
+  });
+
+  $(document).ready(function () {
+    $('#dataTamu').DataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+      },
+      "pageLength": 25
+    });
   });
 </script>
 
