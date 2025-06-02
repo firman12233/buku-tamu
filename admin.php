@@ -136,21 +136,11 @@ $result = $conn->query($sql);
       </div>
     </div>
   </nav>
-<form class="row g-3 mb-4" method="get" action="download_tamu.php" target="_blank">
-    <div class="col-md-4">
-        <label for="tanggal_awal" class="form-label">Dari Tanggal</label>
-        <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" required>
-    </div>
-    <div class="col-md-4">
-        <label for="tanggal_akhir" class="form-label">Sampai Tanggal</label>
-        <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" required>
-    </div>
-    <div class="col-md-4 d-flex align-items-end">
-        <button type="submit" class="btn btn-success w-100">
-            <i class="bi bi-download"></i> Download Data
-        </button>
-    </div>
-</form>
+<div class="mb-3 text-end">
+  <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#downloadModal">
+    <i class="bi bi-download me-1"></i> Download Data Tamu
+  </button>
+</div>
 
 <div class="container my-4">
     <h2 class="mb-4">Data Tamu</h2>
@@ -243,8 +233,43 @@ $result = $conn->query($sql);
     </div>
   </div>
 </div>
+<!-- Modal Download -->
+<div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="downloadModalLabel"><i class="bi bi-calendar-range me-2"></i>Unduh Data Tamu</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        <form action="download_tamu.php" method="get" target="_blank">
+          <div class="mb-3">
+            <label for="tanggal_awal_modal" class="form-label">Dari Tanggal</label>
+            <input type="date" class="form-control" id="tanggal_awal_modal" name="tanggal_awal" required>
+          </div>
+          <div class="mb-3">
+            <label for="tanggal_akhir_modal" class="form-label">Sampai Tanggal</label>
+            <input type="date" class="form-control" id="tanggal_akhir_modal" name="tanggal_akhir" required>
+          </div>
+          <div class="text-end mt-4">
+            <button type="submit" class="btn btn-success">
+              <i class="bi bi-file-earmark-arrow-down me-1"></i> Download File
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const downloadModal = document.getElementById('downloadModal');
+  downloadModal.addEventListener('shown.bs.modal', () => {
+    document.getElementById('tanggal_awal_modal').focus();
+  });
+</script>
 <script>
     function setDetail(tr) {
         const nama = tr.getAttribute('data-nama');
