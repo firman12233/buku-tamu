@@ -94,9 +94,12 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="nomer_hp" class="form-label">Nomor HP</label>
-                            <input type="text" class="form-control" id="nomer_hp" name="nomer_hp" placeholder="08xxxxxxxxxx" required>
+                        <label for="nomer_hp" class="form-label">Nomor HP</label>
+                        <input type="tel" pattern="[0-9]*" inputmode="numeric" 
+                                class="form-control" id="nomer_hp" name="nomer_hp"
+                                placeholder="08xxxxxxxxxx" required>
                         </div>
+
 
                         <div class="mb-3">
                             <label for="asal_instansi" class="form-label">Asal Instansi</label>
