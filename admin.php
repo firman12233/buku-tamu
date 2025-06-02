@@ -96,7 +96,8 @@ $result = $conn->query($sql);
           <th>#</th>
           <th>Tanggal</th>
           <th>Nama Tamu</th>
-          <th>Alamat</th>
+          <th>Asal Instansi</th>
+          <th>Nama Yang Dituju</th>
           <th>Detail</th>
         </tr>
       </thead>
@@ -115,7 +116,8 @@ $result = $conn->query($sql);
           <td class="text-center"><?= $no++ ?></td>
           <td class="text-center"><?= formatTanggalPendek($row['tanggal']) ?></td>
           <td><?= htmlspecialchars($row['nama_tamu']) ?></td>
-          <td><?= htmlspecialchars($row['alamat']) ?></td>
+          <td><?= htmlspecialchars($row['asal_instansi']) ?></td>
+          <td><?= htmlspecialchars($row['nama_tujuan']) ?></td>
           <td class="text-center">
             <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detailModal" onclick="setDetail(this.closest('tr'))">
               Lihat Detail
