@@ -9,12 +9,12 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 include 'koneksi.php';
 
-// Pastikan parameter ada
+
 if (!isset($_GET['tanggal_awal']) || !isset($_GET['tanggal_akhir'])) {
     die('Parameter tanggal tidak lengkap.');
 }
 
-// Ambil tanggal dari URL
+
 $tanggal_awal = $_GET['tanggal_awal'];
 $tanggal_akhir = $_GET['tanggal_akhir'];
 
@@ -34,7 +34,7 @@ $filename = "data_tamu_" . $tanggal_awal . "_sampai_" . $tanggal_akhir . ".xls";
 header("Content-Type: application/vnd.ms-excel; charset=utf-8");
 header("Content-Disposition: attachment; filename=\"$filename\"");
 header("Cache-Control: max-age=0");
-echo "\xEF\xBB\xBF"; // BOM untuk UTF-8 Excel
+echo "\xEF\xBB\xBF"; 
 
 // Tabel header
 echo "<table border='1'>";
