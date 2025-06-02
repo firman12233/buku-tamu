@@ -43,6 +43,21 @@
             border-color: #86b7fe;
             box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
         }
+
+        .school-header img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .school-header h4 {
+            margin-bottom: 0;
+            font-weight: bold;
+        }
+
+        .school-header p {
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -52,9 +67,17 @@
         <div class="col-lg-8 col-md-10">
             <div class="card border-0">
                 <div class="card-body p-5">
+
+                    <div class="text-center mb-4 school-header">
+                        <img src="logo-smkn1slawi.png" alt="Logo Sekolah" class="mb-2">
+                        <h4>SMK N 1 SLAWI</h4>
+                        <p class="text-muted">Jl. H. Agus Salim Slawi Kab Tegal Jawa Tengah</p>
+                    </div>
+
                     <h3 class="text-center text-primary mb-4">
                         <i class="bi bi-pencil-square me-2"></i>Form Buku Tamu Digital
                     </h3>
+
                     <form id="bukuTamuForm" action="proses_buku_tamu.php" method="POST" enctype="multipart/form-data" novalidate>
 
                         <div class="mb-3">
@@ -134,7 +157,6 @@
     // Validasi Form Sebelum Submit
     document.getElementById('bukuTamuForm').addEventListener('submit', function (e) {
         const form = e.target;
-
         const fields = ['nama_tamu', 'alamat', 'nomer_hp', 'asal_instansi', 'nama_tujuan', 'keperluan'];
         let valid = true;
 
