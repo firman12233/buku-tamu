@@ -94,12 +94,9 @@
                         </div>
 
                         <div class="mb-3">
-                        <label for="nomer_hp" class="form-label">Nomor HP</label>
-                        <input type="tel" pattern="[0-9]*" inputmode="numeric" 
-                                class="form-control" id="nomer_hp" name="nomer_hp"
-                                placeholder="08xxxxxxxxxx" required>
+                            <label for="nomer_hp" class="form-label">Nomor HP</label>
+                            <input type="text" class="form-control" id="nomer_hp" name="nomer_hp" placeholder="08xxxxxxxxxx" required>
                         </div>
-
 
                         <div class="mb-3">
                             <label for="asal_instansi" class="form-label">Asal Instansi</label>
@@ -141,7 +138,12 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+<!-- NOmer JS -->
+<script>
+  document.getElementById('nomer_hp').addEventListener('input', function () {
+    this.value = this.value.replace(/[^0-9]/g, '');
+  });
+</script>
 <!-- Preview Foto -->
 <script>
     document.getElementById('foto').addEventListener('change', function () {
@@ -159,7 +161,6 @@
             preview.style.display = 'none';
         }
     });
-
     // Validasi Form Sebelum Submit
     document.getElementById('bukuTamuForm').addEventListener('submit', function (e) {
         const form = e.target;
@@ -185,7 +186,6 @@
         }
     });
 </script>
-
 <!-- SweetAlert Notifikasi dari URL -->
 <?php if (isset($_GET['status'])): ?>
 <script>
