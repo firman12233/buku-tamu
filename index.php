@@ -68,11 +68,14 @@
             <div class="card border-0">
                 <div class="card-body p-5">
 
-                    <div class="text-center mb-4 school-header">
-                        <img src="logo-smkn1slawi.png" alt="Logo Sekolah" class="mb-2">
-                        <h4>SMK N 1 SLAWI</h4>
-                        <p class="text-muted">Jl. H. Agus Salim Slawi Kab Tegal Jawa Tengah</p>
+                    <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+                        <img src="logo-smkn1slawi.png" alt="Logo Sekolah" style="width: 70px; height: 70px; object-fit: contain; border-radius: 12px;">
+                        <div class="text-start">
+                            <h5 class="mb-1 fw-bold text-primary">SMK N 1 SLAWI</h5>
+                            <small class="text-muted">Jl. H. Agus Salim, Slawi, Kab. Tegal, Jawa Tengah</small>
+                        </div>
                     </div>
+
 
                     <h3 class="text-center text-primary mb-4">
                         <i class="bi bi-pencil-square me-2"></i>Form Buku Tamu Digital
