@@ -20,24 +20,17 @@ if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggal_awal) || !preg_match('/^\d{4}-
     die('Format tanggal tidak valid.');
 }
 
-$filename = "data_tamu_" . $tanggal_awal . "_sampai_" . $tanggal_akhir . ".xls";
 
+$filename = "data_tamu_{$tanggal_awal}_sampai_{$tanggal_akhir}.csv";
 
-header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+header('Content-Type: text/csv; charset=utf-8');
 header("Content-Disposition: attachment; filename=\"$filename\"");
-header("Cache-Control: max-age=0");
-echo "\xEF\xBB\xBF"; 
-echo "<table border='1'>";
-echo "<tr>
-    <th>No</th>
-    <th>Tanggal</th>
-    <th>Nama Tamu</th>
-    <th>Alamat</th>
-    <th>Nomor HP</th>
-    <th>Asal Instansi</th>
-    <th>Nama Tujuan</th>
-    <th>Keperluan</th>
-</tr>";
+
+
+$output = fopen('php://output', 'w');
+
+
+fputcsv($output, ['No', 'Tanggal', 'Nama Tamu', 'Alamat', 'Nomor HP', 'Asal Instansi', 'Nama Tujuan', 'Keperluan']);
 
 $sql = "SELECT * FROM tamu WHERE tanggal BETWEEN ? AND ? ORDER BY tanggal ASC";
 $stmt = $conn->prepare($sql);
@@ -47,21 +40,20 @@ $result = $stmt->get_result();
 
 $no = 1;
 while ($row = $result->fetch_assoc()) {
-    echo "<tr>
-        <td>{$no}</td>
-        <td>" . htmlspecialchars($row['tanggal']) . "</td>
-        <td>" . htmlspecialchars($row['nama_tamu']) . "</td>
-        <td>" . htmlspecialchars($row['alamat']) . "</td>
-        <td>" . htmlspecialchars($row['nomer_hp']) . "</td>
-        <td>" . htmlspecialchars($row['asal_instansi']) . "</td>
-        <td>" . htmlspecialchars($row['nama_tujuan']) . "</td>
-        <td>" . htmlspecialchars($row['keperluan']) . "</td>
-    </tr>";
-    $no++;
+    fputcsv($output, [
+        $no++,
+        $row['tanggal'],
+        $row['nama_tamu'],
+        $row['alamat'],
+        $row['nomer_hp'],
+        $row['asal_instansi'],
+        $row['nama_tujuan'],
+        $row['keperluan']
+    ]);
 }
 
-echo "</table>";
-
+fclose($output);
 $stmt->close();
 $conn->close();
+exit;
 ?>
