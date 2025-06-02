@@ -22,12 +22,11 @@ if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggal_awal) || !preg_match('/^\d{4}-
 
 $filename = "data_tamu_" . $tanggal_awal . "_sampai_" . $tanggal_akhir . ".xls";
 
-// Header untuk download file
+
 header("Content-Type: application/vnd.ms-excel; charset=utf-8");
 header("Content-Disposition: attachment; filename=\"$filename\"");
 header("Cache-Control: max-age=0");
-echo "\xEF\xBB\xBF"; // BOM untuk UTF-8 agar karakter Indonesia tidak rusak
-
+echo "\xEF\xBB\xBF"; 
 echo "<table border='1'>";
 echo "<tr>
     <th>No</th>
