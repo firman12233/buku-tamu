@@ -13,8 +13,8 @@ if (!isset($_GET['tanggal_awal']) || !isset($_GET['tanggal_akhir'])) {
     die('Parameter tanggal tidak lengkap.');
 }
 
-$tanggal_awal = $_GET['tanggal_awal'];
-$tanggal_akhir = $_GET['tanggal_akhir'];
+$tanggal_awal_full = $_GET['tanggal_awal'] . ' 00:00:00';
+$tanggal_akhir_full = $_GET['tanggal_akhir'] . ' 23:59:59';
 
 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggal_awal) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggal_akhir)) {
     die('Format tanggal tidak valid.');
@@ -41,7 +41,7 @@ echo "<tr>
 
 $sql = "SELECT * FROM tamu WHERE tanggal BETWEEN ? AND ? ORDER BY tanggal ASC";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $tanggal_awal, $tanggal_akhir);
+$stmt->bind_param("ss", $tanggal_awal_full, $tanggal_akhir_full);
 $stmt->execute();
 $result = $stmt->get_result();
 
