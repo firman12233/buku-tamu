@@ -64,7 +64,7 @@ while ($row = $result->fetch_assoc()) {
         <td>" . htmlspecialchars($row['tanggal']) . "</td>
         <td>" . htmlspecialchars($row['nama_tamu']) . "</td>
         <td>" . htmlspecialchars($row['alamat']) . "</td>
-        <td>" . htmlspecialchars($row['nomer_hp']) . "</td>
+        <td>'" . htmlspecialchars($row['nomer_hp']) . "</td>
         <td>" . htmlspecialchars($row['asal_instansi']) . "</td>
         <td>" . htmlspecialchars($row['nama_tujuan']) . "</td>
         <td>" . htmlspecialchars($row['keperluan']) . "</td>
