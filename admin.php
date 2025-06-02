@@ -136,6 +136,21 @@ $result = $conn->query($sql);
       </div>
     </div>
   </nav>
+<form class="row g-3 mb-4" method="get" action="download_tamu.php" target="_blank">
+    <div class="col-md-4">
+        <label for="tanggal_awal" class="form-label">Dari Tanggal</label>
+        <input type="date" class="form-control" id="tanggal_awal" name="tanggal_awal" required>
+    </div>
+    <div class="col-md-4">
+        <label for="tanggal_akhir" class="form-label">Sampai Tanggal</label>
+        <input type="date" class="form-control" id="tanggal_akhir" name="tanggal_akhir" required>
+    </div>
+    <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-download"></i> Download Data
+        </button>
+    </div>
+</form>
 
 <div class="container my-4">
     <h2 class="mb-4">Data Tamu</h2>
