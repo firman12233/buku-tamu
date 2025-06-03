@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buku Tamu Digital</title>
-    <link rel="icon" href="logo-smkn1slawi.png" type="image/png">
+    <link rel="icon" href="logo-smkn1slawi1.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -70,7 +70,7 @@
                 <div class="card-body p-5">
 
                     <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
-                        <img src="logo-smkn1slawi.png" alt="Logo Sekolah" style="width: 70px; height: 70px; object-fit: contain; border-radius: 12px;">
+                        <img src="logo-smkn1slawi1.png" alt="Logo Sekolah" style="width: 70px; height: 70px; object-fit: contain; border-radius: 12px;">
                         <div class="text-start">
                             <h5 class="mb-1 fw-bold text-primary">SMK N 1 SLAWI</h5>
                             <small class="text-muted">Jl. H. Agus Salim, Slawi, Kab. Tegal, Jawa Tengah</small>
