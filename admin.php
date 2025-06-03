@@ -33,8 +33,14 @@ function formatTanggalIndo($datetime) {
     return "$hariNama, $tgl $bln $tahun $jam";
 }
 
+// Jalankan query
 $sql = "SELECT * FROM tamu ORDER BY tanggal DESC";
 $result = $conn->query($sql);
+
+// Cek error query
+if (!$result) {
+    die("Query gagal: " . $conn->error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,9 +51,8 @@ $result = $conn->query($sql);
     <title>Admin - Data Buku Tamu</title>
     <link rel="icon" href="logo-smkn1slawi1.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <style>
         body { background-color: #f8f9fa; }
         .table-primary { background-color: #0d6efd !important; color: white !important; }
@@ -55,7 +60,6 @@ $result = $conn->query($sql);
         .modal-content { border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); border: none; }
         .modal-header { background-color: #0d6efd; color: white; }
         .btn-close { filter: invert(1); }
-        .modal-body > div.mt-4 { background-color: #e9ecef; padding: 8px; border-radius: 4px; }
     </style>
 </head>
 <body class="bg-light">
@@ -79,7 +83,7 @@ $result = $conn->query($sql);
   </div>
 </nav>
 
-<!-- BUTTON DOWNLOAD -->
+<!-- CONTENT -->
 <div class="container mt-4">
   <div class="d-flex justify-content-end mb-3">
     <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#downloadModal">
@@ -103,7 +107,7 @@ $result = $conn->query($sql);
         </tr>
       </thead>
       <tbody>
-        <?php $no=1; while ($row = $result->fetch_assoc()): ?>
+        <?php $no = 1; while ($row = $result->fetch_assoc()): ?>
         <tr 
           data-nama="<?= htmlspecialchars($row['nama_tamu']) ?>"
           data-alamat="<?= htmlspecialchars($row['alamat']) ?>"
@@ -139,7 +143,7 @@ $result = $conn->query($sql);
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title w-100 text-center">TAMU</h5>
+        <h5 class="modal-title w-100 text-center">Detail Tamu</h5>
         <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-center">
@@ -150,31 +154,29 @@ $result = $conn->query($sql);
         <div class="mb-2"><strong>Asal Instansi:</strong><div id="modalAsalInstansi"></div></div>
         <div class="mb-2"><strong>Nama Yang Dituju:</strong><div id="modalNamaTujuan"></div></div>
         <div class="mb-2"><strong>Keperluan:</strong><div id="modalKeperluan"></div></div>
-        <div class="mt-4"><span id="modalTanggal" class="small"></span></div>
+        <div class="mt-4"><span id="modalTanggal" class="small text-muted"></span></div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- MODAL DOWNLOAD -->
-<div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel">
+<div class="modal fade" id="downloadModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow">
       <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="downloadModalLabel">
-          <i class="bi bi-calendar-range me-2"></i>Unduh Data Tamu
-        </h5>
+        <h5 class="modal-title"><i class="bi bi-calendar-range me-2"></i>Unduh Data Tamu</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <form action="download_tamu.php" method="get" target="_blank">
           <div class="mb-3">
             <label for="tanggal_awal_modal" class="form-label">Dari Tanggal</label>
-            <input type="date" class="form-control" id="tanggal_awal_modal" name="tanggal_awal" required>
+            <input type="date" class="form-control" name="tanggal_awal" id="tanggal_awal_modal" required>
           </div>
           <div class="mb-3">
             <label for="tanggal_akhir_modal" class="form-label">Sampai Tanggal</label>
-            <input type="date" class="form-control" id="tanggal_akhir_modal" name="tanggal_akhir" required>
+            <input type="date" class="form-control" name="tanggal_akhir" id="tanggal_akhir_modal" required>
           </div>
           <div class="text-end mt-4">
             <button type="submit" class="btn btn-success">
@@ -187,12 +189,59 @@ $result = $conn->query($sql);
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
- 
-    <script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-messaging-compat.js"></script>
+
+<script>
+  // Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAkeqjE_GTnKqnXwnmstsjH7DezknpFSEk",
+    authDomain: "buku-tamu-44225.firebaseapp.com",
+    projectId: "buku-tamu-44225",
+    messagingSenderId: "105863260105",
+    appId: "1:105863260105:web:6a4ab69e8cc43103c2aa18",
+    measurementId: "G-S1GB57JDG6"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+
+  navigator.serviceWorker.register('/buku-tamu/firebase-messaging-sw.js')
+    .then(function(registration) {
+      Notification.requestPermission().then(function(permission) {
+        if (permission === 'granted') {
+          messaging.getToken({
+            vapidKey: 'BOXzhNcXwQrcOQed6eqiA1FJdn9vg2B6EAz7BowcEMMjmpQIylPfG6KOpkbYC8OHjByoJEGfc7szpCt_fVJpPP8',
+            serviceWorkerRegistration: registration
+          }).then(function(token) {
+            console.log('Token FCM:', token);
+            $.post("simpan_token.php", { token: token, role: 'admin' }, function(response) {
+              console.log('Response simpan token:', response);
+            });
+          }).catch(function(err) {
+            console.error('Gagal mendapatkan token:', err);
+          });
+        } else {
+          console.warn('Notifikasi tidak diizinkan oleh pengguna.');
+        }
+      });
+    }).catch(function(err) {
+      console.error('Service Worker gagal diregistrasi:', err);
+    });
+
+  messaging.onMessage(payload => {
+    const { title, body } = payload.notification;
+    new Notification(title, { body });
+  });
+</script>
+<script>
+  // Set detail modal
   function setDetail(tr) {
     document.getElementById('modalNama').textContent = tr.dataset.nama;
     document.getElementById('modalAlamat').textContent = tr.dataset.alamat;
@@ -201,23 +250,18 @@ $result = $conn->query($sql);
     document.getElementById('modalNamaTujuan').textContent = tr.dataset.nama_tujuan;
     document.getElementById('modalKeperluan').textContent = tr.dataset.keperluan;
     document.getElementById('modalTanggal').textContent = tr.dataset.tanggal;
-    document.getElementById('fotoTamu').src = 'uploads/' + tr.dataset.foto;
+    document.getElementById('fotoTamu').src = tr.dataset.foto ? 'uploads/' + tr.dataset.foto : '';
   }
-
-  document.getElementById('downloadModal').addEventListener('shown.bs.modal', () => {
-    document.getElementById('tanggal_awal_modal').focus();
-  });
 
   $(document).ready(function () {
     $('#dataTamu').DataTable({
-      "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
+      language: {
+        url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/id.json"
       },
-      "pageLength": 25
+      pageLength: 25
     });
   });
 </script>
-
 </body>
 </html>
 
